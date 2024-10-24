@@ -1,0 +1,6 @@
+with open("numeros.txt", "r") as arquivo:
+    conteudo = arquivo.read()
+    numeros = map(int, conteudo.split(","))
+    soma = sum(numeros)
+
+print(f"Soma dos números: {soma}")
