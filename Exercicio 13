@@ -1,0 +1,32 @@
+def paginar_arquivo(entrada, saida, max_caracteres=76, max_linhas=60):
+    with open(entrada, 'r') as arquivo_entrada:
+        linhas = arquivo_entrada.readlines()
+
+    pagina_atual = 1
+    linha_contador = 0
+
+    with open(saida, 'w') as arquivo_saida:
+        for linha in linhas:
+            
+            while len(linha) > max_caracteres:
+                parte = linha[:max_caracteres]
+                arquivo_saida.write(parte + '\n')
+                linha = linha[max_caracteres:]
+                linha_contador += 1
+
+           
+            arquivo_saida.write(linha)
+            linha_contador += 1
+
+            
+            if linha_contador >= max_linhas:
+                arquivo_saida.write(f"\nPágina {pagina_atual} - {entrada}\n")
+                pagina_atual += 1
+                linha_contador = 0
+
+       
+        if linha_contador > 0:
+            arquivo_saida.write(f"\nPágina {pagina_atual} - {entrada}\n")
+
+
+paginar_arquivo('entrada.txt', 'saida.txt')
