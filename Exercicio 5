@@ -1,0 +1,6 @@
+with open("texto.txt", "r") as arquivo1, open("copia.txt", "r") as arquivo2:
+    conteudo1 = arquivo1.read()
+    conteudo2 = arquivo2.read()
+
+with open("combinado.txt", "w") as combinado:
+    combinado.write(conteudo1 + conteudo2)
