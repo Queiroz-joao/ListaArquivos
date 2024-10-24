@@ -1,0 +1,30 @@
+def bytes_para_megabytes(bytes):
+    return bytes / (1024 * 1024)
+
+def percentual_uso(espaco, total):
+    return (espaco / total) * 100
+
+
+usuarios = []
+total_espaco = 0
+
+with open("usuarios.txt", "r") as arquivo:
+    for linha in arquivo:
+        usuario, espaco = linha.rsplit(maxsplit=1)
+        espaco = int(espaco)
+        usuarios.append((usuario, espaco))
+        total_espaco += espaco
+
+
+with open("relatorio.txt", "w") as relatorio:
+    relatorio.write("ACME Inc. Uso do espaço em disco pelos usuários\n")
+    relatorio.write("------------------------------------------------------------------------\n")
+    relatorio.write("Nr. Usuário        Espaço utilizado  % do uso\n")
+
+    for i, (usuario, espaco) in enumerate(usuarios, start=1):
+        espaco_mb = bytes_para_megabytes(espaco)
+        uso_percentual = percentual_uso(espaco, total_espaco)
+        relatorio.write(f"{i:<2} {usuario:<15} {espaco_mb:,.2f} MB      {uso_percentual:,.2f}%\n")
+
+    relatorio.write(f"\nEspaço total ocupado: {bytes_para_megabytes(total_espaco):,.2f} MB\n")
+    relatorio.write(f"Espaço médio ocupado: {bytes_para_megabytes(total_espaco / len(usuarios)):.2f} MB\n")
