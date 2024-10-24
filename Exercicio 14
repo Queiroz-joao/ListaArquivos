@@ -1,0 +1,11 @@
+def limpar_arquivo(entrada, saida):
+    with open(entrada, 'r') as arquivo_entrada:
+        linhas = arquivo_entrada.readlines()
+
+    with open(saida, 'w') as arquivo_saida:
+        for linha in linhas:
+            linha = ' '.join(linha.split())
+            if linha.strip():  # Adiciona apenas linhas não vazias
+                arquivo_saida.write(linha + '\n')
+
+limpar_arquivo('entrada.txt', 'saida.txt')
