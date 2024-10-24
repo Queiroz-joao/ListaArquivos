@@ -1,0 +1,3 @@
+with open("texto.txt", "r") as arquivo:
+    num_linhas = len(arquivo.readlines())
+    print(f"Número de linhas: {num_linhas}")
