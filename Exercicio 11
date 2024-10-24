@@ -1,0 +1,24 @@
+import re
+
+def validar_ip(ip):
+    padrao = r'^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+    return re.match(padrao, ip) is not None
+
+with open("enderecos.txt", "r") as arquivo:
+    enderecos = arquivo.readlines()
+
+enderecos_validos = []
+enderecos_invalidos = []
+
+for ip in enderecos:
+    ip = ip.strip()
+    if validar_ip(ip):
+        enderecos_validos.append(ip)
+    else:
+        enderecos_invalidos.append(ip)
+
+with open("relatorio.txt", "w") as relatorio:
+    relatorio.write("[Endereços válidos:]\n")
+    relatorio.write("\n".join(enderecos_validos) + "\n")
+    relatorio.write("[Endereços inválidos:]\n")
+    relatorio.write("\n".join(enderecos_invalidos) + "\n")
