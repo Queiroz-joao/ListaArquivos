@@ -1,0 +1,7 @@
+with open("texto.txt", "r") as arquivo:
+    conteudo = arquivo.read()
+
+conteudo_modificado = conteudo.replace("mundo", "Python")
+
+with open("modificado.txt", "w") as arquivo_modificado:
+    arquivo_modificado.write(conteudo_modificado)
