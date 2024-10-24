@@ -1,0 +1,3 @@
+with open("Mensagem.txt", "w") as arquivo:
+    arquivo.write("Olá mundo!")
+print("Arquivo criado com sucesso!")
